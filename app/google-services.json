@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1042599767193",
+    "project_id": "udchat-8f672",
+    "storage_bucket": "udchat-8f672.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1042599767193:android:46ca3a04c60bd499c31c08",
+        "android_client_info": {
+          "package_name": "com.hap.appchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1042599767193-vhd5fla0f0j01st8if9l6jd7e81ams2o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbp5YKoHOAe7DyQUq7DaF8cT1d78HPgvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1042599767193-vhd5fla0f0j01st8if9l6jd7e81ams2o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
