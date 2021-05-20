@@ -5,15 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.ContextMenu;
+
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Toast;
+
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.hap.appchat.Adapters.FragmentAdapter;
 import com.hap.appchat.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
@@ -27,8 +31,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference myRef = database.getReference("mesage");
+        myRef.setValue("Hello, Word!");
         auth = FirebaseAuth.getInstance();
 
+        binding.viewPager.setAdapter(new FragmentAdapter(getSupportFragmentManager()));
+        binding.tablayout.setupWithViewPager(binding.viewPager);
+
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
 
     }
 
@@ -46,7 +68,8 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.settings:
 
-                Toast.makeText(this, "setting click", Toast.LENGTH_LONG).show();
+                Intent intent1=new Intent(MainActivity.this, SettingActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.logout:
 
@@ -54,34 +77,15 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, SignInActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.groupChat:
+                Intent intentt = new Intent(MainActivity.this, GroupChatActivity.class);
+                startActivity(intentt);
+                break;
 
         }
 
         return true;
     }
 
-//    @Override
-//    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
-//
-//        super.onCreateContextMenu(menu, v, menuInfo);
-//        getMenuInflater().inflate(R.menu.menu, menu);
-//    }
-//
-//    @Override
-//    public boolean onContextItemSelected(@NonNull MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.settings:
-//
-//                Toast.makeText(this, "setting click", Toast.LENGTH_LONG).show();
-//                break;
-//            case R.id.logout:
-//
-//                auth.signOut();
-//                Intent intent = new Intent(MainActivity.this, SignInActivity.class);
-//                startActivity(intent);
-//                break;
-//
-//        }
-//        return super.onContextItemSelected(item);
-//    }
+
 }

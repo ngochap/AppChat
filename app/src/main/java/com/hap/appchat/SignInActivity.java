@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -35,6 +36,7 @@ public class SignInActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
     FirebaseDatabase database;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,11 +44,11 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         // getSupportActionBar().hide();
 
-database=FirebaseDatabase.getInstance();
+        database=FirebaseDatabase.getInstance();
         auth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(SignInActivity.this);
-        progressDialog.setTitle("Login");
-        progressDialog.setMessage("Đang đăng nhập");
+        progressDialog.setTitle("Đăng nhập");
+        progressDialog.setMessage("Chờ Tý");
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -58,47 +60,56 @@ database=FirebaseDatabase.getInstance();
         binding.btnSignin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressDialog.show();
-                auth.signInWithEmailAndPassword(
-                        binding.eEmail.getText().toString(), binding.ePassWord.getText().toString())
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
 
-                                progressDialog.dismiss();
-                                if (task.isSuccessful()) {
-                                    Intent intent = new Intent(SignInActivity.this, MainActivity.class);
-                                    startActivity(intent);
-//                                } else {
-//                                    if (binding.eEmail.getText()==null|| binding.ePassWord.getText()==null) {
-//                                        Intent intent = new Intent(SignInActivity.this, SignInActivity.class);
-//                                        startActivity(intent);
-//                                        Toast.makeText(SignInActivity.this, "nhap day du thong tin", Toast.LENGTH_LONG).show();
-//
-
-                                } else {
-                                        Intent intent = new Intent(SignInActivity.this, SignInActivity.class);
+                if(binding.eEmail.getText().toString().isEmpty()){
+                    binding.eEmail.setError("Email không được để trống");
+                    return;}
+                if(binding.ePassWord.getText().toString().isEmpty()) {
+                    binding.ePassWord.setError("Mật Khẩu không được để trống");
+                    return;
+                }
+                    progressDialog.show();
+                    auth.signInWithEmailAndPassword(
+                            binding.eEmail.getText().toString(), binding.ePassWord.getText().toString())
+                            .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressDialog.dismiss();
+                                    if (task.isSuccessful()) {
+                                        Intent intent = new Intent(SignInActivity.this, MainActivity.class);
                                         startActivity(intent);
+                                    } else {
+                                        binding.eEmail.getText().clear();
+                                        binding.ePassWord.getText().clear();
                                         Toast.makeText(SignInActivity.this, "email hoặc mật khẩu không đúng", Toast.LENGTH_LONG).show();
 
                                     }
                                 }
 
-                        });
-                binding.chuacotaikhoan.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
-                        startActivity(intent);
-                    }
-                });
+                            });
 
+                }
+
+
+
+        });
+        //facebook
+
+        //facebook
+
+        binding.chuacotaikhoan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(intent);
             }
         });
 
         binding.btnGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                progressDialog.show();
                 signIn();
             }
         });
@@ -151,22 +162,26 @@ database=FirebaseDatabase.getInstance();
                             users.setProfilepic(user.getPhotoUrl().toString());
 
 
-                           database.getReference().child("Users").child(user.getUid()).setValue(users);
+                            database.getReference().child("Users").child(user.getUid()).setValue(users);
 
 
                             Intent intent=new Intent(SignInActivity.this, MainActivity.class);
                             startActivity(intent);
                             Toast.makeText(SignInActivity.this, "Đăng nhập với Google thành công", Toast.LENGTH_LONG).show();
 
-                           //updateUI(user);
+                            //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w("TAG", "signInWithCredential:failure", task.getException());
-                           // updateUI(null);
+                            // updateUI(null);
                         }
                     }
                 });
     }
 
-
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finishAffinity();
+    }
 }

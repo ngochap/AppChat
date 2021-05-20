@@ -2,9 +2,9 @@ package com.hap.appchat.Model;
 
 public class Users {
 
-    String profilepic, userName, email, password, userId, lastMessage;
+    String profilepic, userName, email, password, userId, lastMessage, status;
 
-    public Users(String profilepic, String userName, String email, String password, String userId, String lastMessage) {
+    public Users(String profilepic, String userName, String email, String password, String userId, String lastMessage, String status) {
         this.profilepic = profilepic;
         this.userName = userName;
         this.email = email;
@@ -23,6 +23,21 @@ public class Users {
 
         }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getProfilepic() {
         return profilepic;
@@ -56,13 +71,6 @@ public class Users {
         this.password = password;
     }
 
-    public String getUserId(String key) {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
-    }
 
     public String getLastMessage() {
         return lastMessage;

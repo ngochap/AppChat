@@ -9,6 +9,12 @@
         />
     <item
         app:showAsAction="collapseActionView"
+        android:id="@+id/groupChat"
+        android:title="Group Chat"
+
+        />
+    <item
+        app:showAsAction="collapseActionView"
         android:id="@+id/logout"
         android:title="Đăng xuất"
 

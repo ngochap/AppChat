@@ -6,10 +6,12 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -40,7 +42,7 @@ public class ChatsFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = FragmentChatsBinding.inflate(inflater, container, false);
 
-        database=FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
 
         UsersAdapter adapter = new UsersAdapter(list, getContext());
         binding.chatRecycleView.setAdapter(adapter);
@@ -54,19 +56,23 @@ public class ChatsFragment extends Fragment {
                 list.clear();
                 for (DataSnapshot dataSnapshot : snapshot.getChildren()) {
                     Users users = dataSnapshot.getValue(Users.class);
-                    users.getUserId(dataSnapshot.getKey());
+                    users.setUserId(dataSnapshot.getKey());
+                    if (!users.getUserId().equals(FirebaseAuth.getInstance().getUid())) {
 
+
+                    // Log.d("onDataChange","onDataChange");
                     list.add(users);
                 }
+            }
                 adapter.notifyDataSetChanged();
-            }
+        }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        @Override
+        public void onCancelled (@NonNull DatabaseError error){
+            Log.d("onCancelled", "onCancelled");
+        }
+    });
 
         return binding.getRoot();
-    }
+}
 }
