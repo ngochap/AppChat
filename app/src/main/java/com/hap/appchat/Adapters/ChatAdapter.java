@@ -14,16 +14,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
+;
 import com.hap.appchat.Model.MessageModel;
 import com.hap.appchat.R;
+import com.hap.appchat.blacklist.BadWordFilter;
 
 
-import java.text.DateFormat;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
+
 
 public class ChatAdapter extends RecyclerView.Adapter {
 
@@ -121,6 +122,7 @@ public class ChatAdapter extends RecyclerView.Adapter {
         //return 0;
     }
 
+
     public class RecieverViewHolder extends RecyclerView.ViewHolder {
 
         TextView recieverMsg, recievertime;
@@ -142,8 +144,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
             super(itemView);
             senderMsg = itemView.findViewById(R.id.senderText);
 
-           // senderMsg.setError("xxx");
-            //senderMsg.setFilters();
+
+
             senderTime = itemView.findViewById(R.id.senderTime);
             Calendar c = Calendar.getInstance();
             SimpleDateFormat format = new SimpleDateFormat("HH:mm");
@@ -158,6 +160,8 @@ public class ChatAdapter extends RecyclerView.Adapter {
 //               String time = hours + ":" + minius;
 //               senderTime.setText(time);
 
+
         }
     }
+
 }

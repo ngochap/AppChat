@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.text.InputFilter;
 import android.text.method.CharacterPickerDialog;
 import android.view.View;
 import android.widget.Toast;
@@ -109,6 +110,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                 String message = binding.eMessage.getText().toString();
 
                 if (!message.equals("")) {
+
                     final MessageModel model = new MessageModel(senderId, message);
                     model.setTimestamp(new Date().getTime());
                     binding.eMessage.setText("");
@@ -131,8 +133,6 @@ public class ChatDetailActivity extends AppCompatActivity {
                                         public void onSuccess(Void aVoid) {
 
 
-
-
                                         }
                                     });
                                 }
@@ -145,9 +145,6 @@ public class ChatDetailActivity extends AppCompatActivity {
 
 
     }
-//    public void blacklist(){
-//        String name=binding.eMessage.getText().toString();
-//        Toast.makeText(ChatDetailActivity.this, name, Toast.LENGTH_SHORT).show();
-//    }
+
 
 }

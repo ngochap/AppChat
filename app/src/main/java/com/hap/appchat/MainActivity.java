@@ -18,13 +18,14 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.hap.appchat.Adapters.FragmentAdapter;
+import com.hap.appchat.blacklist.BadWordFilter;
 import com.hap.appchat.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     FirebaseAuth auth;
-
+    BadWordFilter badWordFilter = new BadWordFilter();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("mesage");
+        DatabaseReference myRef = database.getReference("message");
         myRef.setValue("Hello, Word!");
         auth = FirebaseAuth.getInstance();
 
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.settings:
 
-                Intent intent1=new Intent(MainActivity.this, SettingActivity.class);
+                Intent intent1 = new Intent(MainActivity.this, SettingActivity.class);
                 startActivity(intent1);
                 break;
             case R.id.logout:
