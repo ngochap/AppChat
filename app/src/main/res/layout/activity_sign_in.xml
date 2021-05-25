@@ -99,7 +99,7 @@
                 app:cornerRadius="4dp" />
 
             <Button
-                android:id="@+id/btn_facebook"
+                android:id="@+id/btnPhone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
@@ -108,7 +108,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:drawableLeft="@drawable/ic_facebook"
-                android:text="FaceBook"
+                android:text="phone"
                 app:backgroundTint="@color/colorFb"
                 app:cornerRadius="4dp" />
         </LinearLayout>

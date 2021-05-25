@@ -9,29 +9,31 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
 ;
+import com.hap.appchat.ChatDetailActivity;
 import com.hap.appchat.Model.MessageModel;
 import com.hap.appchat.R;
-import com.hap.appchat.blacklist.BadWordFilter;
-
 
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+import static com.hap.appchat.R.id.chatRecycleView;
 
 public class ChatAdapter extends RecyclerView.Adapter {
 
-
+    private RecyclerView recyclerViewlist;
     ArrayList<MessageModel> messageModels;
     Context context;
     String recId;
+    private LinearLayoutManager linearLayoutManager;
 
     public ChatAdapter(ArrayList<MessageModel> messageModels, Context context) {
         this.messageModels = messageModels;
@@ -50,7 +52,6 @@ public class ChatAdapter extends RecyclerView.Adapter {
 
 
     @NonNull
-
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == SENDER_VIEW_TYPE) {
@@ -144,22 +145,17 @@ public class ChatAdapter extends RecyclerView.Adapter {
             super(itemView);
             senderMsg = itemView.findViewById(R.id.senderText);
 
+            // String input = (String) senderMsg.getText().toString();
+
+            // String output = BlackList.getCensoredText(input);
 
 
             senderTime = itemView.findViewById(R.id.senderTime);
+
             Calendar c = Calendar.getInstance();
             SimpleDateFormat format = new SimpleDateFormat("HH:mm");
             String time = format.format(c.getTime());
             senderTime.setText(time);
-
-
-//               Date dt = new Date();
-//
-//               int hours = dt.getHours();
-//               int minius = dt.getMinutes();
-//               String time = hours + ":" + minius;
-//               senderTime.setText(time);
-
 
         }
     }

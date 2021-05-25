@@ -56,16 +56,8 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     private void onClick(View v) {
-//        if (binding.eEmail.getText().toString().isEmpty() || binding.ePassWord.getText().toString().isEmpty()
-//                || binding.eUserName.getText().toString().isEmpty()
-//                ||binding.eConfirmPassWord.getText().toString().isEmpty()) {
-//            Toast.makeText(getApplicationContext(), "Thieu thong tin dang ky", Toast.LENGTH_LONG).show();
-//
-//        }
-        if (binding.eUserName.getText().toString().isEmpty()) {
-            binding.eUserName.setError("Email không được để trống");
-            return;
-        }
+
+
         if (binding.eEmail.getText().toString().isEmpty()) {
             binding.eEmail.setError("Email không được để trống");
             return;
@@ -107,7 +99,7 @@ public class SignUpActivity extends AppCompatActivity {
             database.getReference().child("Users").child(id).setValue(user);
 
             Toast.makeText(SignUpActivity.this, "thêm tài khoản thành công", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(SignUpActivity.this, SignInActivity.class);
+            Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
             startActivity(intent);
         } else {
             Toast.makeText(SignUpActivity.this, "Thất bại!! Vui lòng kiểm tra lại thông tin", Toast.LENGTH_SHORT).show();

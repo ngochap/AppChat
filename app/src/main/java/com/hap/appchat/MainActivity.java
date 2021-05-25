@@ -17,18 +17,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
 import com.hap.appchat.Adapters.FragmentAdapter;
-import com.hap.appchat.blacklist.BadWordFilter;
+
 import com.hap.appchat.databinding.ActivityMainBinding;
+
+import java.io.InputStream;
 
 public class MainActivity extends AppCompatActivity {
 
     ActivityMainBinding binding;
     FirebaseAuth auth;
-    BadWordFilter badWordFilter = new BadWordFilter();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());

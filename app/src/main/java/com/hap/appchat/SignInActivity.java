@@ -93,14 +93,18 @@ public class SignInActivity extends AppCompatActivity {
 
 
         });
-        //facebook
-
-        //facebook
 
         binding.chuacotaikhoan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(SignInActivity.this, SignUpActivity.class);
+                startActivity(intent);
+            }
+        });
+        binding.btnPhone.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(SignInActivity.this, PhoneLoginActivity.class);
                 startActivity(intent);
             }
         });
@@ -113,12 +117,6 @@ public class SignInActivity extends AppCompatActivity {
                 signIn();
             }
         });
-//        if(auth.getCurrentUser()!=null){
-//            Intent intent=new Intent(SignInActivity.this, SignInActivity.class);
-//            startActivity(intent);
-//        }
-
-
     }
     int RC_SIGN_IN=65;
 
