@@ -155,7 +155,7 @@ public class ChatDetailActivity extends AppCompatActivity {
                 int readCounter = 0;
                 try {
 
-                    URL url=new URL("https://drive.google.com/drive/u/0/folders/1DtMq-ceZ_-tpZh6uaJVKs2z2fbWKlD0W");
+                    URL url=new URL("https://docs.google.com/document/d/1N2BWpoir7n9aHVq7MQtAsMFRrZI2KeDRn4_ZKclGFHg/edit");
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     BufferedReader reader=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
 //
