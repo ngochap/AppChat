@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.view.View;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -148,19 +149,19 @@ public class ChatDetailActivity extends AppCompatActivity {
 
             }
 
-            private String loadBadWords(final String input) {
+            private String loadBadWords(final String input){
                 int largestWordLength = 0;
 
                 Map<String, String[]> allBadWords = new HashMap<String, String[]>();
                 int readCounter = 0;
                 try {
+                    StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
 
-                    URL url=new URL("https://docs.google.com/document/d/1N2BWpoir7n9aHVq7MQtAsMFRrZI2KeDRn4_ZKclGFHg/edit");
+                    StrictMode.setThreadPolicy(policy);
+                    URL url=new URL("https://blacklist-9525a.web.app/blacklist.html");
                     HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
                     BufferedReader reader=new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-//
-//                    BufferedReader reader = new BufferedReader(new InputStreamReader(urlConnection, Charset.forName("UTF-8")));
-//                            .openConnection().getInputStream());
+
 
 //                    InputStream inputStream = getResources().openRawResource(R.raw.data1);
 //                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
@@ -212,16 +213,8 @@ public class ChatDetailActivity extends AppCompatActivity {
                         .replaceAll("0", "o")
                         .replaceAll("9", "g")
                         .replaceAll("_", " ")
-                        .replaceAll("-", " ")
                         .replaceAll("#", " ")
-                        .replaceAll("$", " ")
-                        .replaceAll("^", " ")
-                        .replaceAll("&", " ")
-                        .replaceAll("\\(", " ")
-                        .replaceAll("\\)", " ")
-                        .replaceAll("\\+", " ")
-                        .replaceAll("=", " ")
-                        .replaceAll("\\*", " ");
+                        .replaceAll("$", " ");
 
                 modifiedInput = modifiedInput.toLowerCase().replaceAll("", "");
                 ArrayList<String> badWordsFound = new ArrayList<>();
